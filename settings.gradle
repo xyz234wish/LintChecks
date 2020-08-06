@@ -1,0 +1,4 @@
+include ':app'
+include ':lintrules'
+include ':lintModule'
+rootProject.name = "LintChecks"

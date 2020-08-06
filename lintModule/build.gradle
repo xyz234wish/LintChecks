@@ -1,0 +1,58 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 29
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+/** Package the given lint checks library into this AAR  */
+dependencies {
+    lintPublish project(':lintrules')
+}
+
+def getRepositoryUsername() {
+    File file = rootProject.file('local.properties')
+    if (file.exists()) {
+        InputStream inputStream = rootProject.file('local.properties').newDataInputStream();
+        Properties properties = new Properties()
+        properties.load(inputStream)
+
+        if (properties.containsKey("bintray.user")) {
+            return properties.getProperty("bintray.user")
+        } else {
+            return ""
+        }
+    }
+}
+
+def getRepositoryApiKey() {
+    File file = rootProject.file('local.properties')
+    if (file.exists()) {
+        InputStream inputStream = rootProject.file('local.properties').newDataInputStream();
+        Properties properties = new Properties()
+        properties.load(inputStream)
+
+        if (properties.containsKey("bintray.apikey")) {
+            return properties.getProperty("bintray.apikey")
+        } else {
+            return ""
+        }
+    }
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        pom.version = '1.0.0'
+        pom.artifactId = 'lintModule'
+        pom.groupId = 'com.wish.lint'
+        repository(url: "file:///Users/momo/.m2/repository/")
+    }
+}
