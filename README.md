@@ -8,7 +8,7 @@
 
 ### 使用方法
 
-1. 引入implement 'androidx.core:core-ktx:${lastVersion}'工程
+1. 引入implement 'com.wish:lintModule:${lastReleaseVersion}'工程
 2. 在需要限制调用者的类或方法上添加CallerClass注解，并注册可调用的类。
 
 ```
@@ -20,11 +20,11 @@ class ApiModel {
 }
 ```
 ### 使用效果
-注册可调用的LoginViewModel可以正常使用ApiModel并调用getUser方法。
-![image.png](/attach/5eec63b2016c8.png)
+LoginRepository可以正常使用ApiModel并调用getUser方法。
+![image1.png](https://github.com/xyz234wish/LintChecks/blob/master/image/image1.png)
 
-activity没有注册在使用ApiModel就会在ide里报错。
-![image.png](/attach/5eec642f65bab.png)
+LoginViewModel使用ApiModel就会在ide里报错。
+![image2.png](https://github.com/xyz234wish/LintChecks/blob/master/image/image2.png)
 
 ### 使用注意
 此功能类似CallSuper，只是在idea里起到错误提示作用，并没有改变java的public使用规则，仍然能够编译通过。

@@ -24,7 +24,7 @@ def moduleVersion = "1.0.1"
 def getRepositoryUsername() {
     File file = rootProject.file('local.properties')
     if (file.exists()) {
-        InputStream inputStream = rootProject.file('local.properties').newDataInputStream();
+        InputStream inputStream = rootProject.file('local.properties').newDataInputStream()
         Properties properties = new Properties()
         properties.load(inputStream)
 
@@ -39,7 +39,7 @@ def getRepositoryUsername() {
 def getRepositoryApiKey() {
     File file = rootProject.file('local.properties')
     if (file.exists()) {
-        InputStream inputStream = rootProject.file('local.properties').newDataInputStream();
+        InputStream inputStream = rootProject.file('local.properties').newDataInputStream()
         Properties properties = new Properties()
         properties.load(inputStream)
 
@@ -51,23 +51,26 @@ def getRepositoryApiKey() {
     }
 }
 
+// 上传到jcenter ./gradlew clean build bintrayUpload
 publish {
     bintrayUser = getRepositoryUsername()
     bintrayKey = getRepositoryApiKey()
     dryRun = false
     userOrg = 'wish'
-    groupId = 'com.wish.lint'
+    groupId = 'com.wish'
     artifactId = 'lintModule'
     publishVersion = moduleVersion
     desc = 'A library that limited method caller class'
     website = 'https://github.com/xyz234wish/LintChecks'
 }
 
+
+// 上传本地
 uploadArchives {
     repositories.mavenDeployer {
         pom.version = moduleVersion
         pom.artifactId = 'lintModule'
-        pom.groupId = 'com.wish.lint'
+        pom.groupId = 'com.wish'
         repository(url: "file:///Users/momo/.m2/repository/")
     }
 }
