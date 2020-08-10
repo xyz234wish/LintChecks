@@ -70,7 +70,7 @@ uploadArchives {
     repositories.mavenDeployer {
         pom.version = moduleVersion
         pom.artifactId = 'lintModule'
-        pom.groupId = 'com.wish'
+        pom.groupId = 'com.wish.local'
         repository(url: "file:///Users/momo/.m2/repository/")
     }
 }
