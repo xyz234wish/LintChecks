@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 29
@@ -17,6 +18,8 @@ android {
 dependencies {
     lintPublish project(':lintrules')
 }
+
+def moduleVersion = "1.0.1"
 
 def getRepositoryUsername() {
     File file = rootProject.file('local.properties')
@@ -48,9 +51,21 @@ def getRepositoryApiKey() {
     }
 }
 
+publish {
+    bintrayUser = getRepositoryUsername()
+    bintrayKey = getRepositoryApiKey()
+    dryRun = false
+    userOrg = 'wish'
+    groupId = 'com.wish.lint'
+    artifactId = 'lintModule'
+    publishVersion = moduleVersion
+    desc = 'A library that limited method caller class'
+    website = 'https://github.com/xyz234wish/LintChecks'
+}
+
 uploadArchives {
     repositories.mavenDeployer {
-        pom.version = '1.0.0'
+        pom.version = moduleVersion
         pom.artifactId = 'lintModule'
         pom.groupId = 'com.wish.lint'
         repository(url: "file:///Users/momo/.m2/repository/")
